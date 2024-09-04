@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Asuntos y Procuradores</title>
+</head>
+<body>
+<h1>Asuntos y Procuradores</h1>
+<a href="/asuntos-procuradores/new">Agregar Nuevo Asunto-Procurador</a>
+<ul>
+    <li th:each="asuntoProcurador : ${asuntoProcuradores}">
+        <span th:text="${asuntoProcurador.asunto.numeroExpediente}"></span> - <span th:text="${asuntoProcurador.procurador.nombre}"></span>
+        <a th:href="@{/asuntos-procuradores/{id}/edit(id=${asuntoProcurador.id})}">Editar</a>
+        <a th:href="@{/asuntos-procuradores/{id}/delete(id=${asuntoProcurador.id})}" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
+    </li>
+</ul>
+</body>
+</html>

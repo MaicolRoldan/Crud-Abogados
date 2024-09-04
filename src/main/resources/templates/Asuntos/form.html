@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${asunto.id != null} ? 'Editar Asunto' : 'Nuevo Asunto'"></title>
+    <style>
+        /* General Page Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"], input[type="date"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${asunto.id != null} ? 'Editar Asunto' : 'Nuevo Asunto'"></h1>
+    <form th:action="@{/asuntos}" th:object="${asunto}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <label for="numeroExpediente">Número de Expediente:</label>
+        <input type="text" id="numeroExpediente" th:field="*{numeroExpediente}" required />
+
+        <label for="fechaInicio">Fecha de Inicio:</label>
+        <input type="date" id="fechaInicio" th:field="*{fechaInicio}" required />
+
+        <label for="fechaFinalizacion">Fecha de Finalización:</label>
+        <input type="date" id="fechaFinalizacion" th:field="*{fechaFinalizacion}" />
+
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" th:field="*{estado}" required />
+
+        <label for="cliente">Cliente:</label>
+        <select id="cliente" th:field="*{cliente.id}">
+            <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nombre}"></option>
+        </select>
+
+        <div class="form-actions">
+            <button type="submit">Guardar</button>
+            <a href="/asuntos">Cancelar</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

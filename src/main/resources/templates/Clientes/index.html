@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Clientes</title>
+    <style>
+        /* General Page Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-links a {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            background-color: #0056b3;
+        }
+
+        /* List Styles */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        li span {
+            margin-right: 10px;
+        }
+
+        li a {
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+
+        li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Clientes</h1>
+    <div class="nav-links">
+        <a href="/clientes/new">Agregar Nuevo Cliente</a>
+        <a href="/asuntos/new">Agregar Nuevo Asunto</a>
+        <a href="/procuradores/new">Agregar Nuevo Procurador</a>
+        <a href="/asuntos-procuradores/new">Agregar Nuevo Procurador</a>
+    </div>
+
+    <ul>
+        <li th:each="cliente : ${clientes}">
+            <span th:text="${cliente.nombre}"></span> - <span th:text="${cliente.dni}"></span>
+            <a th:href="@{/clientes/{id}/edit(id=${cliente.id})}">Editar</a>
+            <a th:href="@{/clientes/{id}/delete(id=${cliente.id})}" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

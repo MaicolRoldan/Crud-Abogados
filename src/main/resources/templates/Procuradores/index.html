@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Procuradores</title>
+    <style>
+        /* General Page Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .nav-link:hover {
+            background-color: #0056b3;
+        }
+
+        /* List Styles */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        li span {
+            margin-right: 10px;
+        }
+
+        li a {
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+
+        li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Procuradores</h1>
+    <a href="/procuradores/new" class="nav-link">Agregar Nuevo Procurador</a>
+
+    <ul>
+        <li th:each="procurador : ${procuradores}">
+            <span th:text="${procurador.nombre}"></span> - <span th:text="${procurador.dni}"></span>
+            <div>
+                <a th:href="@{/procuradores/{id}/edit(id=${procurador.id})}">Editar</a>
+                <a th:href="@{/procuradores/{id}/delete(id=${procurador.id})}" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Asuntos</title>
+    <style>
+        /* General Page Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header, footer {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header h1, footer p {
+            margin: 0;
+        }
+
+        /* Title */
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* List Styles */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        li a {
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+
+        li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Add New Item Link */
+        a.add-new {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        a.add-new:hover {
+            background-color: #0056b3;
+        }
+
+        /* Confirm Delete Button */
+        a.delete {
+            color: #d9534f;
+        }
+
+        a.delete:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Asuntos</h1>
+    </header>
+
+    <a href="/asuntos/new" class="add-new">Agregar Nuevo Asunto</a>
+
+    <ul>
+        <li th:each="asunto : ${asuntos}">
+            <span th:text="${asunto.numeroExpediente}"></span> - <span th:text="${asunto.estado}"></span>
+            <a th:href="@{/asuntos/{id}/edit(id=${asunto.id})}">Editar</a>
+            <a th:href="@{/asuntos/{id}/delete(id=${asunto.id})}" class="delete" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
+        </li>
+    </ul>
+
+    <footer>
+        <p>&copy; 2024 Tu Empresa</p>
+    </footer>
+</div>
+</body>
+</html>

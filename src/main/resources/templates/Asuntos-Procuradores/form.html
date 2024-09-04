@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${asuntoProcurador.id != null} ? 'Editar Asunto-Procurador' : 'Nuevo Asunto-Procurador'"></title>
+</head>
+<body>
+<h1 th:text="${asuntoProcurador.id != null} ? 'Editar Asunto-Procurador' : 'Nuevo Asunto-Procurador'"></h1>
+<form th:action="@{/asuntos-procuradores}" th:object="${asuntoProcurador}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <label for="asunto">Asunto:</label>
+    <select id="asunto" th:field="*{asunto.id}">
+        <option th:each="asunto : ${asuntos}" th:value="${asunto.id}" th:text="${asunto.numeroExpediente}"></option>
+    </select>
+    <label for="procurador">Procurador:</label>
+    <select id="procurador" th:field="*{procurador.id}">
+        <option th:each="procurador : ${procuradores}" th:value="${procurador.id}" th:text="${procurador.nombre}"></option>
+    </select>
+    <button type="submit">Guardar</button>
+    <a href="/asuntos-procuradores">Cancelar</a>
+</form>
+</body>
+</html>
